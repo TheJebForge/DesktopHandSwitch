@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{DesktopHandSwitch}") = "DesktopHandSwitch", "DesktopHandSwitch\DesktopHandSwitch.csproj", "{EFC83F36-C624-455F-AEF9-6C59F698E3D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EFC83F36-C624-455F-AEF9-6C59F698E3D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFC83F36-C624-455F-AEF9-6C59F698E3D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFC83F36-C624-455F-AEF9-6C59F698E3D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFC83F36-C624-455F-AEF9-6C59F698E3D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
