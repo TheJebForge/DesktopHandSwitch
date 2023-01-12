@@ -25,6 +25,7 @@ namespace DesktopHandSwitch
 
         static DesktopHandSwitch modInstance;
         static Chirality initialChirality = Chirality.Right;
+        static bool initialChiralityWasSet;
         static DateTime lastSwitch = DateTime.UtcNow;
 
         ModConfiguration config;
@@ -55,7 +56,10 @@ namespace DesktopHandSwitch
         class CommonTool_OnStart_Patch
         {
             static void Postfix(CommonTool __instance) {
+                if (initialChiralityWasSet) return;
+                
                 initialChirality = __instance.InputInterface.PrimaryHand;
+                initialChiralityWasSet = true;
             }
         }
         
