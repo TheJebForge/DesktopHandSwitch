@@ -1,22 +1,17 @@
 ﻿using HarmonyLib;
-using NeosModLoader;
 using FrooxEngine;
-using FrooxEngine.UIX;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Runtime.CompilerServices;
+using ResoniteModLoader;
+
 // ReSharper disable InconsistentNaming
 
 namespace DesktopHandSwitch
 {
-    public class DesktopHandSwitch : NeosMod
+    public class DesktopHandSwitch : ResoniteMod
     {
         public override string Name => "DesktopHandSwitch";
         public override string Author => "TheJebForge";
-        public override string Version => "1.0.1";
+        public override string Version => "1.1.0";
 
         [AutoRegisterConfigKey]
         readonly ModConfigurationKey<Key> ACTIVATION_KEY = new ModConfigurationKey<Key>("activation_key","Activation Key", () => Key.LeftAlt);
@@ -52,10 +47,10 @@ namespace DesktopHandSwitch
             return chirality == Chirality.Left ? Chirality.Right : Chirality.Left;
         }
 
-        [HarmonyPatch(typeof(CommonTool), "OnStart")]
+        [HarmonyPatch(typeof(InteractionHandler), "OnStart")]
         class CommonTool_OnStart_Patch
         {
-            static void Postfix(CommonTool __instance) {
+            static void Postfix(InteractionHandler __instance) {
                 if (initialChiralityWasSet) return;
                 
                 initialChirality = __instance.InputInterface.PrimaryHand;
@@ -63,10 +58,10 @@ namespace DesktopHandSwitch
             }
         }
         
-        [HarmonyPatch(typeof(CommonTool), "OnInputUpdate")]
+        [HarmonyPatch(typeof(InteractionHandler), "OnInputUpdate")]
         class CommonTool_OnInputUpdate_Patch
         {
-            static void Prefix(CommonTool __instance) {
+            static void Prefix(InteractionHandler __instance) {
                 if (modInstance.GetActivationMode()) {
                     if (__instance.InputInterface.GetKeyDown(modInstance.GetActivationKey())) {
                         __instance.InputInterface.PrimaryHand = OppositeChirality(initialChirality);
